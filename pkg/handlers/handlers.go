@@ -9,10 +9,10 @@ import (
 
 var templates = templateloader.GetTemplates()
 
+// Page handlers
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-
-	// err := testTemplate.ExecuteTemplate(w, "base.html", vd)
 	template, err := templates.GetTemplate("index.html")
 	if err != nil {
 		log.Fatalln(err.Error())

@@ -10,6 +10,8 @@ import (
 
 func BuildRoutes() *http.Server {
 	router := mux.NewRouter()
+
+	// routes
 	router.HandleFunc("/", handlers.HomeHandler)
 	router.HandleFunc("/about", handlers.AboutHandler)
 
