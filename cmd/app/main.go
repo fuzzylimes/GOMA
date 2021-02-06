@@ -2,22 +2,18 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/fuzzylimes/goma/pkg/handlers"
+	"github.com/fuzzylimes/goma/pkg/routes"
 	"github.com/fuzzylimes/goma/pkg/templateloader"
 )
 
 func main() {
+	// Load templates to memory
 	templateloader.GetTemplates()
-	http.HandleFunc("/", handlers.HomeHandler)
-	http.HandleFunc("/about", handlers.AboutHandler)
 
-	// handle static files
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./web/public/css"))))
-	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("./web/public/js"))))
-	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("./web/public/img"))))
+	// Build the router
+	srv := routes.BuildRoutes()
 
-	// serve files
-	log.Fatalln(http.ListenAndServe(":8000", nil))
+	// Serve the router
+	log.Fatalln(srv.ListenAndServe())
 }
