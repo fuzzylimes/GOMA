@@ -6,3 +6,7 @@ build: build_css
 
 run:
 	go run .
+
+# Must include file as arg i.e. make add_page file=test
+add_page:
+	go run tools/generator.go -f $(file)

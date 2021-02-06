@@ -96,7 +96,7 @@ func getNewHandler(name string) string {
 	m = strings.Title(m)
 
 	return fmt.Sprintf(`
-// %v
+// %vHandler
 func %vHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	template, err := templates.GetTemplate("%v")
